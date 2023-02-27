@@ -1,8 +1,6 @@
 package Tugas2;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Tugas2
@@ -12,9 +10,8 @@ public class Tugas2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String kata = "";
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         System.out.println("1. Cek Palindrome");
-        System.out.println("2. Cek Alphabet");
+        System.out.println("2. Cek Jenis Alphabet");
         System.out.print("Pilih: "); int pilihanMenu = scanner.nextInt();
 
         scanner.nextLine();
@@ -33,7 +30,7 @@ public class Tugas2 {
     
         int strLength = str.length();
     
-        for (int i = (strLength - 1); i >=0; --i) {
+        for (int i = (strLength - 1); i >= 0; --i) {
             reverseStr = reverseStr + str.charAt(i);
         }
     
@@ -53,12 +50,9 @@ public class Tugas2 {
         int countSymbol = 0;
         int countLetter = 0;
 
-        //Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-
         for (int i=0 ; i<sentence.length(); i++){
             char ch = sentence.charAt(i);
             if(sentence.substring(i, i+1).matches("[aeiouAEIOU]")){
-                System.out.print("");
                 countVocal++;
             }else if(!sentence.substring(i, i+1).matches("[aeiouAEIOU]") && !sentence.substring(i, i+1).matches("[^A-Za-z0-9]")){
                 countConsonant++;
@@ -69,7 +63,7 @@ public class Tugas2 {
             }
             countLetter++;
         }
-        System.out.println("Total Huruf ada : " + countLetter);
+        System.out.println("Total Karakter ada : " + countLetter);
         System.out.println("Alfabet konsonan ada : "+ countConsonant);
         System.out.println("Alfabet vocal ada : "+ countVocal);
         System.out.println("Spasi ada : "+ countSpace);
