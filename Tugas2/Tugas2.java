@@ -1,6 +1,8 @@
 package Tugas2;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Tugas2
@@ -10,18 +12,22 @@ public class Tugas2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String kata = "";
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         System.out.println("1. Cek Palindrome");
         System.out.println("2. Cek Alphabet");
         System.out.print("Pilih: "); int pilihanMenu = scanner.nextInt();
 
-        System.out.println("Masukkan Kata : "); kata = scanner.next();
-        
+        scanner.nextLine();
+        System.out.println("Masukkan Kata : "); kata = scanner.nextLine();
+
         if (pilihanMenu == 1) {
             cekPalindrome(kata);
+        } else if (pilihanMenu == 2){
+            cekAlphabet(kata);
         }
     }
 
-    public static String cekPalindrome(String str) {
+    public static void cekPalindrome(String str) {
         String reverseStr = "";
         str = str.toLowerCase();
     
@@ -37,8 +43,37 @@ public class Tugas2 {
         else {
             System.out.println(str + " bukan Palindrome");
         }
-
-        return "";
         
+    }
+
+    public static void cekAlphabet(String sentence) {
+        int countConsonant = 0;
+        int countSpace = 0;
+        int countVocal = 0;
+        int countSymbol = 0;
+        int countLetter = 0;
+
+        //Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+
+        for (int i=0 ; i<sentence.length(); i++){
+            char ch = sentence.charAt(i);
+            if(sentence.substring(i, i+1).matches("[aeiouAEIOU]")){
+                System.out.print("");
+                countVocal++;
+            }else if(!sentence.substring(i, i+1).matches("[aeiouAEIOU]") && !sentence.substring(i, i+1).matches("[^A-Za-z0-9]")){
+                countConsonant++;
+            }else if(ch == ' '){
+                countSpace++;
+            }else if(sentence.substring(i, i+1).matches("[^A-Za-z0-9]")){
+                countSymbol++;
+            }
+            countLetter++;
+        }
+        System.out.println("Total Huruf ada : " + countLetter);
+        System.out.println("Alfabet konsonan ada : "+ countConsonant);
+        System.out.println("Alfabet vocal ada : "+ countVocal);
+        System.out.println("Spasi ada : "+ countSpace);
+        System.out.println("Simbol ada : "+ countSymbol);
+
     }
 }
