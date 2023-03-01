@@ -24,21 +24,21 @@ public class Tugas2 {
         }
     }
 
-    public static void cekPalindrome(String str) {
+    public static void cekPalindrome(String sentence) {
         String reverseStr = "";
-        str = str.toLowerCase();
+        sentence = sentence.toLowerCase();
     
-        int strLength = str.length();
+        int strLength = sentence.length();
     
         for (int i = (strLength - 1); i >= 0; --i) {
-            reverseStr = reverseStr + str.charAt(i);
+            reverseStr = reverseStr + sentence.charAt(i);
         }
     
-        if (str.toLowerCase().equals(reverseStr.toLowerCase())) {
-            System.out.println(str + " adalah Palindrome");
+        if (sentence.toLowerCase().equals(reverseStr.toLowerCase())) {
+            System.out.println(sentence + " adalah Palindrome");
         }
         else {
-            System.out.println(str + " bukan Palindrome");
+            System.out.println(sentence + " bukan Palindrome");
         }
         
     }
