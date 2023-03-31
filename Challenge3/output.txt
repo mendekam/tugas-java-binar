@@ -1,0 +1,40 @@
+KelasA
+Mean: 8.391304347826088
+Median: 8.0
+Mode: 7
+
+KelasB
+Mean: 8.115384615384615
+Median: 8.0
+Mode: 7
+
+KelasC
+Mean: 8.391304347826088
+Median: 8.0
+Mode: 7
+
+KelasD
+Mean: 8.346153846153847
+Median: 8.0
+Mode: 7
+
+KelasE
+Mean: 8.391304347826088
+Median: 8.0
+Mode: 7
+
+KelasF
+Mean: 8.391304347826088
+Median: 8.0
+Mode: 7
+
+KelasG
+Mean: 8.23076923076923
+Median: 8.0
+Mode: 7
+
+KelasH
+Mean: 8.321428571428571
+Median: 8.0
+Mode: 7
+
