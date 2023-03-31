@@ -6,11 +6,13 @@ import java.util.List;
 
 public class SchoolData {
     
+    private static List<ClassData> classDataList;
+
     public SchoolData(List<ClassData> classDataList) {
-        
+        this.classDataList = classDataList;
     }
 
-    public static double getMean(List<ClassData> classDataList) {
+    public double getMean() {
         int sum = 0;
         int count = 0;
         for (ClassData classData : classDataList) {
@@ -23,7 +25,7 @@ public class SchoolData {
         return (double) sum / count;
     }
 
-    public static double getMedian(List<ClassData> classDataList) {
+    public double getMedian() {
         List<Integer> allGrades = new ArrayList<>();
         for (ClassData classData : classDataList) {
             List<Integer> grades = classData.getClassGrades();
@@ -44,7 +46,7 @@ public class SchoolData {
         }
     }
 
-    public static int getModus(List<ClassData> classDataList) {
+    public int getModus() {
         List<Integer> allGrades = new ArrayList<>();
         for (ClassData classData : classDataList) {
             List<Integer> grades = classData.getClassGrades();

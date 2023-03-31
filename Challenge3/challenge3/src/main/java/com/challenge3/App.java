@@ -4,10 +4,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class App {
-    final static String DATA_SOURCE_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_sekolah.csv";
-    final static String DATA_OUTPUT_CLASS_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_per_kelas.txt";
-    final static String DATA_OUTPUT_SCHOOL_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_sekolah.txt";
+    static final String DATA_SOURCE_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_sekolah.csv";
+    static final String DATA_OUTPUT_CLASS_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_per_kelas.txt";
+    static final String DATA_OUTPUT_SCHOOL_PATH = "D:\\Abied\\Code\\Binar\\Challenge3\\challenge3\\res\\data_sekolah.txt";
     static List<ClassData> classDataList = new ArrayList<>();
+    static SchoolData schoolData = new SchoolData(classDataList);
     public static void main(String[] args) {
         menu();
     }
@@ -31,12 +32,10 @@ public class App {
 
             switch (menuChoice) {
                 case 1 ->{
-                    readFile();
                     writeFile(DATA_OUTPUT_CLASS_PATH);
                 }
                     
                 case 2 ->{
-                    readFile();
                     writeFile(DATA_OUTPUT_SCHOOL_PATH);
                 }
                 case 0 -> System.out.println("Terima kasih telah menggunakan aplikasi ini");
@@ -45,18 +44,14 @@ public class App {
             
         } while (menuChoice != 0);
     }
-
-    public static void detailMenuFile() {
-        
-    }
-
     public static void writeFile(String filename) {
         try {
-            if (filename == DATA_OUTPUT_CLASS_PATH) {
+            FileWriter fw = new FileWriter(filename);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            if(filename.equals(DATA_OUTPUT_CLASS_PATH)){
                 classDataList.forEach(classData -> {
                     try {
-                        FileWriter fw = new FileWriter(filename);
-                        BufferedWriter bw = new BufferedWriter(fw);
                         bw.write("REKAP NILAI KELAS");
                         bw.newLine();
                         bw.write(classData.getClassName());
@@ -68,50 +63,27 @@ public class App {
                         bw.write("Modus: " + classData.getModus());
                         bw.newLine();
                         bw.newLine();
-                        bw.close();
-                        fw.close();
-                        System.out.println("Success Write File!");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
-            } else if (filename == DATA_OUTPUT_SCHOOL_PATH) {
-                FileWriter fw = new FileWriter(filename);
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write("REKAP NILAI SEKOLAH");
-                bw.newLine();
-                bw.write("Mean: " + SchoolData.getMean(classDataList));
-                bw.newLine();
-                bw.write("Median: " + SchoolData.getMedian(classDataList));
-                bw.newLine();
-                bw.write("Modus: " + SchoolData.getModus(classDataList));
-                bw.newLine();
-                bw.newLine();
-                bw.close();
-                fw.close();
-                System.out.println("Success Write File!");
-                
-            }
-            FileWriter fw = new FileWriter(filename);
-            BufferedWriter bw = new BufferedWriter(fw);
-        
-            classDataList.forEach(classData -> {
+
+            }else if(filename.equals(DATA_OUTPUT_SCHOOL_PATH)){
                 try {
-                    bw.write("REKAP NILAI KELAS");
+                    bw.write("REKAP NILAI SEKOLAH");
                     bw.newLine();
-                    bw.write(classData.getClassName());
+                    bw.write("Mean: " + schoolData.getMean());
                     bw.newLine();
-                    bw.write("Mean: " + classData.getMean());
+                    bw.write("Median: " + schoolData.getMedian());
                     bw.newLine();
-                    bw.write("Median: " + classData.getMedian());
-                    bw.newLine();
-                    bw.write("Modus: " + classData.getModus());
-                    bw.newLine();
+                    bw.write("Modus: " + schoolData.getModus());
                     bw.newLine();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            });
+            }
+        
+            
         
             bw.close();
             fw.close();
@@ -126,14 +98,13 @@ public class App {
         try (BufferedReader br = new BufferedReader(new FileReader(DATA_SOURCE_PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] split = line.split(";");
-                String className = split[0];
-                List<Integer> classGrades = Arrays.stream(split)
+                String[] tokens = line.split(";");
+                String className = tokens[0];
+                List<Integer> classGrades = Arrays.stream(tokens)
                         .skip(1)
-                        .map(Integer::parseInt)
+                        .map(data -> Integer.parseInt(data))
                         .collect(Collectors.toList());
-                ClassData classData = new ClassData(className, classGrades);
-                classDataList.add(classData);
+                classDataList.add(new ClassData(className, classGrades));
             }
         } catch (IOException e) {
             e.printStackTrace();

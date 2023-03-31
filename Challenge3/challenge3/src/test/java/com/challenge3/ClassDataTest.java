@@ -1,20 +1,21 @@
 package com.challenge3;
-
-import java.util.Arrays;
-
+ 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-public class SchoolDataTest {
-    ClassData classData;
-    SchoolData schoolData;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Arrays;
+ 
+@ExtendWith(MockitoExtension.class)
+class ClassDataTest {
+ 
+	ClassData classData;
  
 	@BeforeEach
 	void prepare(){
 		classData = new ClassData("XI MIPA 2", Arrays.asList(10,9,8,8,8,9,7,7,7,7));
-        schoolData = new SchoolData(Arrays.asList(classData));
 	}
  
 	@DisplayName("Success Test -> getModus()")
@@ -52,4 +53,7 @@ public class SchoolDataTest {
 	void testMedianFailed(){
 		Assertions.assertNotEquals(10,classData.getMedian());
 	}
+
+ 
+ 
 }
